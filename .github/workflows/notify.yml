@@ -1,0 +1,27 @@
+name: 3点几啦！喝杯奶茶先啦
+
+# 触发条件
+on: 
+  # 触发条件1：main分支有提交时候触发
+  push:
+    branches:
+      - main
+  # 触发条件1：定时任务，每天15点触发
+  schedule:
+    - cron: "0 15 * * *"
+jobs:
+  drink_tea:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 这就给大家发消息
+        run: |
+          curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=yourKey' \
+          -H 'Content-Type: application/json' \
+          -d '
+          {
+                "msgtype": "text",
+                "text": {
+                    "content": "都别给我愣着，赶紧滴干饭🍚"
+                }
+          }'
+
